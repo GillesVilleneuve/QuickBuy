@@ -10,21 +10,21 @@ namespace QuickBuy.Dominio.ObjetoDeValor
 
         public bool EhBoleto
         {
-            get {  return Id == (int)TipoFormaPagamentoEnum.Boleto} // faz um Casting de (int) para converter 
+            get { return Id == (int)TipoFormaPagamentoEnum.Boleto; } // faz um Casting de (int) para converter 
         }
         public bool EhCartaoCredito
         {
-            get { return Id == (int)TipoFormaPagamentoEnum.CartaoCredito}
+            get { return Id == (int)TipoFormaPagamentoEnum.CartaoCredito; }
         }
 
         public bool EhDeposito
         {
-            get { return Id == (int)TipoFormaPagamentoEnum.Deposito}
+            get { return Id == (int)TipoFormaPagamentoEnum.Deposito; }
         }
 
         public bool NaoDefinido
         {
-            get { return Id == (int)TipoFormaPagamentoEnum.NaoDefinido}
+            get { return Id == (int)TipoFormaPagamentoEnum.NaoDefinido; }
         }
 
     }
