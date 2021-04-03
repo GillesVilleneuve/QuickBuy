@@ -12,7 +12,11 @@ namespace QuickBuy.Dominio.Entidades
         public DateTime DataPedido { get; set; }
         public int UsuarioId { get; set; }
 
-        public ICollection<ItemPedido> ItensPedido { get; set; } // uma instância de Pedido deve ter pelo menos um Itempedido
+        // virtual foi feito atribuição tambem na Collection Pedidos da classe Usuario
+        // para EFCore entender que atribuirá a chave primaria de Usuario aqui
+        public virtual Usuario Usuario { get; set; }
+
+        public virtual ICollection<ItemPedido> ItensPedido { get; set; } // uma instância de Pedido deve ter pelo menos um Itempedido
 
         public DateTime DataPrevisaoEntrega { get; set; }
         public string CEP { get; set; }

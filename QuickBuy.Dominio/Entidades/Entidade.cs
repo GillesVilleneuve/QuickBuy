@@ -5,7 +5,7 @@ namespace QuickBuy.Dominio.Entidades
 {
     public abstract class Entidade //abtract = ninguém instanciará minha classe
     {
-        public List<string> _mensagemValidacao { get; set; }
+        private List<string> _mensagemValidacao { get; set; }
 
         private List<string> mensagemValidacao // private p encapsular a mensagem (não poderá ser acessado do lado de fora, pode comecar com minúsculo)
         {
