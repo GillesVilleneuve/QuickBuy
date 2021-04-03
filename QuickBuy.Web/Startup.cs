@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using QuickBuy.Dominio.Contratos;
 using QuickBuy.Repositorio.Contexto;
+using QuickBuy.Repositorio.Repositorios;
 
 namespace QuickBuy.Web
 {
@@ -39,6 +41,9 @@ namespace QuickBuy.Web
                                                         option.UseLazyLoadingProxies() // permite o carregamento de forma automática dos relacionamentos
                                                         .UseMySql(connectionString, 
                                                             m => m.MigrationsAssembly("QuickBuy.Repositorio")));
+
+
+            services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();// recurso de injeção de dependência
 
 
             // In production, the Angular files will be served from this directory
@@ -82,7 +87,8 @@ namespace QuickBuy.Web
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
+                    //spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("Http://localhost:4200/");
                 }
             });
         }
