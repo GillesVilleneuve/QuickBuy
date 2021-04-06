@@ -44,7 +44,7 @@ namespace QuickBuy.Web
 
 
             services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();// recurso de injeção de dependência
-
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

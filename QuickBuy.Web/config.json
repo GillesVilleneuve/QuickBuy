@@ -1,6 +1,7 @@
 {
   "ConnectionStrings": {
     "SqlServerConnection": "",
-    "QuickBuyDB": "server=localhost; uid=root; pwd=asp.net; database=QuickBuyDB"
+    "QuickBuyDB": "server=remotemysql.com; uid=DLMMNhBKO0; pwd=5grcAfvY2z; database=DLMMNhBKO0"
+    //"QuickBuyDB": "server=localhost; uid=root; pwd=asp.net; database=QuickBuyDB"
   }
 }
