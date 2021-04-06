@@ -50,6 +50,12 @@ export class UsuarioServico{
 
   }
 
+  get headers(): HttpHeaders { // metodo para definir a strutura do cabeçalho
+
+    return new HttpHeaders().set('content-type', 'application/json');
+  }
+  
+
   public verificarUsuario(usuario: Usuario): Observable<Usuario> {
 
     const headers = new HttpHeaders().set('content-type', 'application/json');
@@ -62,6 +68,14 @@ export class UsuarioServico{
 
 
     return this.http.post<Usuario>(this.baseURL + "api/usuario/VerificarUsuario", body, { headers });
+
+
+  }
+
+  public cadastrarUsuario(usuario: Usuario): Observable<Usuario> {
+
+
+    return this.http.post<Usuario>(this.baseURL + "api/usuario", JSON.stringify(usuario), { headers: this.headers });
 
 
   }
