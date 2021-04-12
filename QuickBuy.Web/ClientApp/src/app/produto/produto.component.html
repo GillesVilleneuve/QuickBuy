@@ -1,14 +1,18 @@
 
-<h1 class="h4 mb-2 titulo"> Cadastro de Produto</h1>
-
+<h1 class="h4 titulo"> Cadastro de Produto</h1>
 <label for="inputNome" class="sr-only">Nome</label>
 <input type="text" id="inputNome"
-       name="nomeProduto" placeholder="Nome do produto"
-       class=" form-control mb-2 col-md-4"
+       name="nomeProduto"
+       placeholder="Nome do Produto"
+       class="form-control mb-2 col-md-4"
+       [ngClass]="{
+          'is-invalid': nome.invalid && (nome.dirty || nome.touched),
+          'is-valid': nome.valid && (nome.dirty || nome.touched)
+       }"
+       [(ngModel)] ="produto.nome"
        #nome="ngModel"
-       [(ngModel)]="produto.nome"
-       [ngClass]=""
-       required />
+       required
+/>
 
 <div class="invalid-feedback mb-2" *ngIf="nome.invalid && (nome.dirty || nome.touched)">
   <div *ngIf="nome.errors.required">
@@ -22,8 +26,12 @@
        class=" form-control mb-2 col-md-4"
        #descricao="ngModel"
        [(ngModel)]="produto.descricao"
-       [ngClass]=""
-       required />
+       [ngClass]="{
+          'is-invalid': descricao.invalid && (descricao.dirty || descricao.touched) ,
+          'is-valid': descricao.valid && (descricao.dirty || descricao.touched)
+       }"
+       required
+/>
 
 <div class="invalid-feedback mb-2" *ngIf="descricao.invalid && (descricao.dirty || descricao.touched)">
   <div *ngIf="descricao.errors.required">
@@ -39,7 +47,10 @@
        class=" form-control mb-2 col-md-2"
        #preco="ngModel"
        [(ngModel)]="produto.preco"
-       [ngClass]=""
+       [ngClass]="{
+          'is-invalid': preco.invalid && (preco.dirty || preco.touched) ,
+          'is-valid': preco.valid && (preco.dirty || preco.touched)
+       }"
        required />
 
 
@@ -51,12 +62,19 @@
 
 <div class="input-group mb-2">
   <div class="custom-file col-md-4">
-    <input type="file" class="custom-file-input" id="inputfile" />
+
+    <input type="file" class="custom-file-input" id="inputfile" (change)="inputChange($event.target.files)" />
     <label for="inputfile" class="custom-file-label">Escolha uma foto</label>
 
   </div>
 </div>
 
-<button class="btn btn-primary" type="submit" (click)="cadastrar()" >
-    Cadastrar
+<button class="btn btn-primary mb-2" type="submit" (click)="cadastrar()" [disabled]="ativar_spinner">
+  <span class="spinner-border spinner-border-sm" *ngIf="ativar_spinner"></span>
+  Cadastrar
 </button>
+
+<div class="alert alert-danger col-md-4" *ngIf="mensagem">
+  {{mensagem}}
+
+</div>

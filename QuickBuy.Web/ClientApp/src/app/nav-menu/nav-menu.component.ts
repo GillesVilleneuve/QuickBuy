@@ -37,4 +37,9 @@ export class NavMenuComponent {
 
   }
 
+  get usuario() {
+
+    return this.usuarioServico.usuario;
+  }
+
 }

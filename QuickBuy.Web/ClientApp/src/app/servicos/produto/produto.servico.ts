@@ -11,6 +11,8 @@ import { Produto } from "../../modelo/produto";
 
 
 export class ProdutoServico implements OnInit {
+
+  
   private _baseUrl: string;
   public produtos: Produto[];
 
@@ -58,6 +60,12 @@ export class ProdutoServico implements OnInit {
 
     return this.http.get<Produto>(this._baseUrl + "api/produto");
 
+  }
+
+  public enviarArquivo(arquivoSelecionado: File): Observable<string> {
+    const formData: FormData = new FormData();
+    formData.append("arquivoEnviado", arquivoSelecionado, arquivoSelecionado.name);
+    return this.http.post<string>(this._baseUrl + "api/produto/enviarArquivo", formData);
   }
 
 
