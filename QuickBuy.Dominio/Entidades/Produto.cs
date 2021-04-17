@@ -14,11 +14,11 @@
 
             
             if (string.IsNullOrEmpty(Nome))
-                AdicionarCritica("Critica - Nome não pode ficar vazio");
+                AdicionarCritica("Nome do produto não informado");
            
 
             if (string.IsNullOrEmpty(Descricao))
-                AdicionarCritica("Critica - Descricao não pode ficar vazio");
+                AdicionarCritica("Descrição do produto não informado");
 
 
         }

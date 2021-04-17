@@ -69,10 +69,14 @@
   </div>
 </div>
 
-<button class="btn btn-primary mb-2" type="submit" (click)="cadastrar()" [disabled]="ativar_spinner">
-  <span class="spinner-border spinner-border-sm" *ngIf="ativar_spinner"></span>
-  Cadastrar
-</button>
+<div class="from-inline">
+  <!-- form-inline garante que todos os inputs de dados ficarão exibidos em linha-->
+  <button class="btn btn-primary" type="submit" style="margin-right:4px;" (click)="cadastrar()" [disabled]="ativar_spinner">
+    <span class="spinner-border spinner-border-sm" *ngIf="ativar_spinner"></span>
+    Cadastrar
+  </button>
+  <button class="btn btn-secondary" [routerLink]="['/pesquisar-produto']">Cancelar</button>
+</div>
 
 <div class="alert alert-danger col-md-4" *ngIf="mensagem">
   {{mensagem}}

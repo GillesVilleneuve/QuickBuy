@@ -1,0 +1,28 @@
+import { Component, OnInit } from "@angular/core";
+import { Produto } from "../../modelo/produto";
+import { ProdutoServico } from "../../servicos/produto/produto.servico";
+
+
+@Component({
+  selector: "app-loja",
+  templateUrl: "./loja.pesquisa.component.html",
+  styleUrls: ["./loja.pesquisa.component.css"]
+
+})
+
+export class LojaPesquisaComponent implements OnInit {
+
+  public produtos: Produto[];
+
+
+  constructor(produtoServico: ProdutoServico) {
+
+  }
+
+  ngOnInit(): void {
+
+
+  }
+
+
+}

@@ -14,7 +14,7 @@ namespace QuickBuy.Dominio.Entidades
 
         public abstract void Validate(); // ao implementar com abstrac eu forço as filhas a implementarem tb
 
-        protected bool EhValido
+        public bool EhValido
             {
             get { return !mensagemValidacao.Any(); }
             }
@@ -27,6 +27,12 @@ namespace QuickBuy.Dominio.Entidades
         protected void AdicionarCritica(string mensagem)
         {
             mensagemValidacao.Add(mensagem); // mensagemValidacao está emcapsulada sendo private na classe Pai
+
+        }
+
+        public string ObterMensagemValidacao()
+        {
+            return string.Join(". ", mensagemValidacao);
 
         }
 

@@ -1,5 +1,6 @@
 
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { Produto } from "../modelo/produto";
 import { ProdutoServico } from "../servicos/produto/produto.servico";
 
@@ -21,13 +22,25 @@ export class ProdutoComponent implements OnInit {
   public ativar_spinner: boolean;
   public mensagem: string; 
 
-  constructor(private produtoServico: ProdutoServico) {
+  constructor(private produtoServico: ProdutoServico, private router: Router) {
 
 
 
   }
   ngOnInit(): void {
-    this.produto = new Produto();
+    //a var abaixo pega o valor da chave produtoSession no método editarProduto contido no componente presquisa.produto.component.ts
+    var produtoSession = sessionStorage.getItem('produtoSession');
+
+    if (produtoSession) {
+      this.produto = JSON.parse(produtoSession); // Reconverte para Type Script
+
+    } else {
+
+      this.produto = new Produto();
+
+    }
+
+    
   }
 
   public inputChange(files: FileList) {
@@ -42,23 +55,34 @@ export class ProdutoComponent implements OnInit {
           this.ativar_spinner = false;
         },
         e => {
-          console.log(e.error);
+          console.log(e.errors);
       });
   }
 
   public cadastrar() {
-    //this.produtoServico.cadastrar(this.produto)
-     // .subscribe(
-    //    produtoJson => {
-    //      console.log(produtoJson);
-    //    },
-    //    e => {
-    //      console.log(e.error);
-    //    }
+    this.ativarEspera();
+    this.produtoServico.cadastrar(this.produto)
+     .subscribe(
+        produtoJson => {
+         console.log(produtoJson);
+         this.desativarEspera();
+         this.router.navigate(['/pesquisar-produto']);
+        },
+        e => {
+          console.log(e.errors);
+          this.mensagem = e.error;
+          this.desativarEspera();
+        }
 
-    //  );
+      );
   }
 
+  public ativarEspera() {
+    this.ativar_spinner = true;
+  }
+  public desativarEspera() {
+    this.ativar_spinner = false;
+  }
 
 
 
