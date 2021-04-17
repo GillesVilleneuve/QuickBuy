@@ -15,7 +15,18 @@ export class LojaPesquisaComponent implements OnInit {
   public produtos: Produto[];
 
 
-  constructor(produtoServico: ProdutoServico) {
+  constructor(private produtoServico: ProdutoServico) {
+    this.produtoServico.obterTodosProdutos()
+      .subscribe(
+        produtos => {
+          this.produtos = produtos;
+        },
+        e => {
+          console.log(e.error);
+        })
+
+
+
 
   }
 
