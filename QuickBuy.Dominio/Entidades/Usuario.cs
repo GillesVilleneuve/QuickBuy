@@ -9,8 +9,9 @@ namespace QuickBuy.Dominio.Entidades
         public string Senha { get; set; }
         public string Nome { get; set; }
         public string SobreNome { get; set; }
-        
-        
+        public bool EhAdministrador { get; set; }
+
+
         // virtual permite que o EFCore faça uma sobreposição da minha Collection para alimentá-la em tempo de execução
         public virtual ICollection<Pedido> Pedidos { get; set; } // uma instância de Usuário pode ter nenhum ou muitos pedidos
 
