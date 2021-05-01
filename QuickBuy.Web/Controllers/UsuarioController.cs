@@ -38,7 +38,7 @@ namespace QuickBuy.Web.Controllers
 
         [HttpPost("VerificarUsuario")]
 
-        public ActionResult VerificarUsuario([FromBody] Usuario usuario)
+        public ActionResult VerificarUsuario([FromBody] Usuario usuario) // Recebe em JSON e converte em C#
         {    
             try
             {

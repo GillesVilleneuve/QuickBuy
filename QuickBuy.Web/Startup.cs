@@ -34,7 +34,11 @@ namespace QuickBuy.Web
         {
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services
+                .AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            // a linha acima configura para o ASPNET CORE que, quando ele tem que retornar estruturas em JSON
+            // que ele ignore referências em Lopping.
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(); // permite acessar o Contexto da requisição
 
@@ -47,7 +51,8 @@ namespace QuickBuy.Web
 
 
             services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();// recurso de injeção de dependência
-            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();//
+            services.AddScoped<IPedidoRepositorio, PedidoRepositorio>(); // interface para classe concreta
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

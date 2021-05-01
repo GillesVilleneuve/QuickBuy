@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { ItemPedido } from "../../modelo/itemPedido";
 import { Pedido } from "../../modelo/Pedido";
 import { Produto } from "../../modelo/produto";
+import { PedidoServico } from "../../servicos/pedido/pedido.servico";
 import { UsuarioServico } from "../../servicos/usuario/usuario.servico";
 import { LojaCarrinhoCompras } from "../carrinho-compras/loja.carrinho.compras";
 
@@ -24,7 +26,7 @@ export class LojaEfetivarComponent implements OnInit {
     this.atualizarTotal();
   }
 
-  constructor(private usuarioServico: UsuarioServico) { // dessa forma declaramos uma variável implícita dentro do componente atraavés de injeção de dependência
+  constructor(private usuarioServico: UsuarioServico, private pedidoServico: PedidoServico, private router: Router) { // dessa forma declaramos uma variável implícita dentro do componente atraavés de injeção de dependência
 
   }
 
@@ -56,7 +58,23 @@ export class LojaEfetivarComponent implements OnInit {
   }
 
   public efetivarCompra() {
-    let pedido = this.criarPedido();
+   
+
+    this.pedidoServico.efetivarCompra(this.criarPedido()) // bloco de chamada de uma implementação de uma Web API
+      .subscribe(
+        pedidoId => {
+
+          console.log(pedidoId);
+
+          sessionStorage.setItem("pedidoId", pedidoId.toString());
+          this.produtos = [];
+          this.carrinhoCompras.limparCarrinhoCompras();
+          
+          this.router.navigate(["/compra-realizada-sucesso"]);// redirecionar para outra página
+        },
+        e => {
+          console.log(e.error);
+        });
 
   }
 
@@ -67,7 +85,7 @@ export class LojaEfetivarComponent implements OnInit {
     pedido.cidade = "Belo Horizonte";
     pedido.estado = "Minas Gerais";
     pedido.enderecoCompleto = "Waldir Leite Pena";
-    pedido.numeroEndereco = "168";
+    pedido.numEndereco = "168";
     
     pedido.dataPrevisaoEntrega = new Date();
     pedido.formaPagamentoId = 1;

@@ -3,6 +3,8 @@ import { Produto } from "../../modelo/produto";
 
 
 export class LojaCarrinhoCompras {
+  
+  
   public produtos: Produto[] = []; // Lista já está inicializada
 
   public adicionar(produto: Produto) {
@@ -55,7 +57,10 @@ export class LojaCarrinhoCompras {
     var itens = this.obterProdutos();
     if (itens)
       return (itens.length > 0);    
+  }
 
+  public limparCarrinhoCompras() {
+    localStorage.setItem("produtoLocalStorage", "");    
   }
 
 

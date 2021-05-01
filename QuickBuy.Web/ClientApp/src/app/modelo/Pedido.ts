@@ -9,7 +9,7 @@ export class Pedido {
   public estado: string;
   public cidade: string;
   public enderecoCompleto: string;
-  public numeroEndereco: string;
+  public numEndereco: string;
   public formaPagamentoId: number;
 
   public itensPedido: ItemPedido[];
