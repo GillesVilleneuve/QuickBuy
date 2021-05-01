@@ -30,44 +30,31 @@ export class LoginComponent implements OnInit {
   entrar() {
 
     this.ativar_spinner = true;
-    this.usuarioServico.verificarUsuario(this.usuario)
-      .subscribe(
+    this.usuarioServico.verificarUsuario(this.usuario) // verifica se existe o usuário na base, chama o usuarioController
+      .subscribe( // recebe o q a WEB API devolveu
         usuario_json => {
           // essa linha será executada no caso de retorno sem erros
-          
-          //sessionStorage.setItem("usuario-autenticado", "1");
-          this.usuarioServico.usuario = usuario_json;
 
-          if (this.returnUrl == null) {
+          // aqui estamos recebendo o retorno da API verificarUsuario na UsuarioController
+          this.usuarioServico.usuario = usuario_json; // devolve uma instância em Type Script
+
+          //if (this.returnUrl == null) {
             this.router.navigate(['/']);
-          } else
-          {
-            this.router.navigate([this.returnUrl]);
-          }
-          
-
-          this.router.navigate([this.returnUrl]);
-
-
+          //} else {
+           // this.router.navigate([this.returnUrl]);
+          //}
         },
         err => {
 
-          this.ativar_spinner = false;
-
           console.log(err.error);
           this.mensagem = err.error;
+          this.ativar_spinner = false;          
+          
 
         }
 
-      );
-   
+      );        
 
-
-     // this.router.navigate([this.returnUrl]);
-    //}
-
-  }
-
-  
+  }  
   
 }

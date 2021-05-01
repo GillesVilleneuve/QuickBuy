@@ -4,9 +4,8 @@ import { Observable } from "rxjs";
 import { Usuario } from "../../modelo/usuario";
 
 
-@Injectable({
-
-  providedIn: "root"
+@Injectable({ // UsuarioServico é publicado no sistema do Angular de Injeção de Dependência.
+  providedIn: "root" // É onde foi publicado na raiz do subsistema (appmodule, providersIn ["UsuarioServico"])
 
 })
 export class UsuarioServico{
@@ -34,6 +33,12 @@ export class UsuarioServico{
   public usuario_autenticado(): boolean {
     return this._usuario != null && this.usuario.email !="" && this.usuario.senha!="";
 
+  }
+
+  public usuario_administrador(): boolean {
+
+    return this.usuario_autenticado() && this.usuario.ehAdministrador;
+    
   }
 
   public limpar_sessao() {

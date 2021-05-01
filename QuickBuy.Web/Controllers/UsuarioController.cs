@@ -13,11 +13,7 @@ namespace QuickBuy.Web.Controllers
 
         public UsuarioController(IUsuarioRepositorio usuarioRepositorio)
         {
-
             _usuarioRepositorio = usuarioRepositorio;
-
-
-
         }
 
 
@@ -46,11 +42,12 @@ namespace QuickBuy.Web.Controllers
         {    
             try
             {
-                var usuarioRetorno = _usuarioRepositorio.Obter(usuario.Email, usuario.Senha);
+                var usuarioRetorno = _usuarioRepositorio.Obter(usuario.Email, usuario.Senha); // faz uma pesquisa se usuário está na base
+
 
                 if(usuarioRetorno !=null )
                 {
-                    return Ok(usuarioRetorno);
+                    return Ok(usuarioRetorno); // vai retorna o prório usuário em formato JSON passando pela rede e entregando para o Front-End;
                 }
 
                 return BadRequest("Usuário ou senha inválido");
@@ -75,7 +72,8 @@ namespace QuickBuy.Web.Controllers
                 var usuarioCadastrado = _usuarioRepositorio.Obter(usuario.Email);
                 if(usuarioCadastrado != null)                
                     return BadRequest("Usuário já cadastrado no sistema");
-
+                
+                //usuario.EhAdministrador = true;
                 _usuarioRepositorio.Adicionar(usuario);
                 return Ok();
 
